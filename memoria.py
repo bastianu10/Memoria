@@ -46,10 +46,11 @@ tiles = [
     "Palace Bavaro",
     "Palace Punta Cana",
     "Palace Maldivas",
+    "Bamboo",
     "Palace Zanzibar"
 ] * 2
 
-state = {'mark': None}
+state = {'mark': None, 'taps': 0, 'win': False}
 hide = [True] * 64
 
 
@@ -80,6 +81,8 @@ def tap(x, y):
     """Update mark and hidden tiles based on tap."""
     spot = index(x, y)
     mark = state['mark']
+    state['taps'] += 1
+    print(f'Taps: {state["taps"]}')
 
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
@@ -88,6 +91,8 @@ def tap(x, y):
         hide[mark] = False
         state['mark'] = None
 
+    if all(not h for h in hide):
+        state['win'] = True
 
 def draw():
     """Draw image and tiles."""
@@ -109,6 +114,16 @@ def draw():
         goto(x+25, y+15)
         color('black')
         write(tiles[mark], align='center', font=('Arial', 15, 'normal'))
+
+    up()
+    goto(-180, 180)
+    color('black')
+    write(f'Taps: {state["taps"]}', font=('Arial', 14, 'bold'))
+
+    if state['win']:
+        goto(0, 200)
+        color('red')
+        write("¡Felicidades! Has descubierto todas las fichas.", align='center', font=('Arial', 16, 'bold'))
 
     update()
     ontimer(draw, 100)
