@@ -15,7 +15,40 @@ from turtle import *
 from freegames import path
 
 car = path('car.gif')
-tiles = list(range(32)) * 2
+tiles = [
+    "Yucatan",
+    "Tequila",
+    "Palace Mexico",
+    "Playacar",
+    "Lupita",
+    "Palace Riviera Maya",
+    "Cancun",
+    "Caribe",
+    "Palace Las Americas",
+    "Palace Peninsula",
+    "Dunamar",
+    "Palace Costa Mujeres",
+    "Latino",
+    "Santa Fe",
+    "Palace Cabo San Lucas",
+    "Palace Baja California",
+    "Emerald Bay",
+    "Jalisco",
+    "Vallarta",
+    "Palace Pacifico",
+    "Plaza España",
+    "Plaza New York Times Square",
+    "Plaza Berlin",
+    "Plaza Miami Beach",
+    "Plaza The Gresham Dublin",
+    "Palace Aruba",
+    "Palace Paradise Island",
+    "Palace Bavaro",
+    "Palace Punta Cana",
+    "Palace Maldivas",
+    "Palace Zanzibar"
+] * 2
+
 state = {'mark': None}
 hide = [True] * 64
 
@@ -73,9 +106,9 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        goto(x+25, y+15)
         color('black')
-        write(tiles[mark], font=('Arial', 30, 'normal'))
+        write(tiles[mark], align='center', font=('Arial', 15, 'normal'))
 
     update()
     ontimer(draw, 100)
